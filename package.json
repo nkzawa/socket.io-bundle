@@ -1,0 +1,27 @@
+{
+  "name": "socket.io-bundle",
+  "version": "0.0.1",
+  "description": "A collection of middlewares for incoming Socket.IO 1.0",
+  "author": "Naoyuki Kanezawa <naoyuki.kanezawa@gmail.com>",
+  "keywords": [
+    "middleware", "rack", "socket.io", "connect"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nkzawa/socket.io-bundle.git"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --reporter dot"
+  },
+  "dependencies": {
+    "connect": "*",
+    "debug": "*"
+  },
+  "devDependencies": {
+    "socket.io": "nkzawa/socket.io",
+    "socket.io-client": "nkzawa/socket.io-client",
+    "cookie-signature": "1.0.1",
+    "mocha": "*",
+    "chai": "*"
+  }
+}
