@@ -49,8 +49,7 @@ exports.stopServer = function(done) {
 
 exports.header = function(socket, next) {
   var req = socket.request
-    , query = url.parse(req.url, true).query
-    , headers = query.headers;
+    , headers = req.query.headers;
 
   if (headers) {
     headers = JSON.parse(headers);
