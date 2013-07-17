@@ -37,9 +37,38 @@ describe('csrf', function() {
       });
       res.on('end', function() {
         var socket = client('/', {headers: {Cookie: cookie, 'X-CSRF-Token': body}});
-        socket.once('connect', function() {
-          done();
-        });
+        socket.on('connect', done);
+      });
+    }).end();
+  });
+
+  it('should work with a valid token via query', function(done) {
+    var store = new bundle.session.MemoryStore();
+
+    var app = this.app;
+    app.use(connect.cookieParser());
+    app.use(connect.session({secret: 'greg', store: store}));
+    app.use(connect.csrf());
+    app.use(function(req, res) {
+      res.end(req.session._csrf || 'none');
+    });
+
+    var io = this.io;
+    io.use(bundle.cookieParser())
+    io.use(bundle.session({secret: 'greg', store: store}))
+    io.use(bundle.csrf())
+
+    http.request('http://localhost:8888', function(res) {
+      var cookie = res.headers['set-cookie'][0]
+        , body = '';
+
+      res.on('data', function(chunk) {
+        body += chunk;
+      });
+      res.on('end', function() {
+        var socket = client('/?_csrf=' + encodeURIComponent(body),
+                {headers: {Cookie: cookie}});
+        socket.on('connect', done);
       });
     }).end();
   });
@@ -62,7 +91,7 @@ describe('csrf', function() {
 
     http.request('http://localhost:8888', function(res) {
       var cookie = res.headers['set-cookie'][0];
-      var socket = client('/', {headers: {Cookie: cookie, 'X-CSRF-Token': '42'}});
+      var socket = client('/?_csrf=42', {headers: {Cookie: cookie}});
       socket.once('error', function(err) {
         expect(err).to.eql('Forbidden');
         done();

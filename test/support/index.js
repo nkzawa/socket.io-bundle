@@ -15,6 +15,7 @@ exports.client = function client(path, options) {
   if (options.headers) {
     var urlObj = url.parse(uri, true);
     urlObj.query.headers = JSON.stringify(options.headers);
+    delete urlObj.search;
     uri = url.format(urlObj);
   }
   return io(uri, {forceNew: true});
