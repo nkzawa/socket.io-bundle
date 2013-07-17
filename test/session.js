@@ -2,12 +2,11 @@ var expect = require('chai').expect
   , signature = require('cookie-signature')
   , bundle = require('../')
   , support = require('./support')
-  , client = support.client;
+  , client = support.client
+  , sessionCookie = support.sessionCookie;
 
 
 var min = 60 * 1000;
-
-var sessionCookie = support.sessionCookie;
 
 function sid(val) {
   if (!val) return '';
@@ -53,6 +52,48 @@ describe('session', function() {
           socket.on('message', function(body) {
             expect(body).to.eql(2);
             done()
+          });
+        });
+      });
+
+      it('should persist after disconnection', function(done) {
+        this.io
+          .use(bundle.cookieParser())
+          .use(bundle.session({ secret: 'keyboard cat', cookie: { maxAge: min, httpOnly: false }}))
+          .on('connection', function(socket) {
+            socket.on('message', function(callback) {
+              var req = socket.request
+                , session = req.session;
+
+              // checks that cookie options persisted
+              expect(session.cookie.httpOnly).to.eql(false);
+
+              session.count = session.count || 0;
+              session.count++;
+
+              callback(session.count, sessionCookie(req, 'keyboard cat'));
+            });
+
+            socket.on('_disconnect', function() {
+              socket.disconnect(true);
+            });
+          });
+
+        var socket1 = client();
+        socket1.on('connect', function() {
+          socket1.send(function(body, cookie) {
+            expect(body).to.eql(1);
+
+            socket1.on('disconnect', function() {
+              var socket2 = client('/', {headers: {cookie: cookie}});
+              socket2.on('connect', function() {
+                socket2.send(function(body) {
+                  expect(body).to.eql(2);
+                  done();
+                });
+              });
+            });
+            socket1.emit('_disconnect');
           });
         });
       });
