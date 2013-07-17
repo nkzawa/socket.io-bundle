@@ -14,7 +14,7 @@
     "test": "node_modules/.bin/mocha --reporter dot"
   },
   "dependencies": {
-    "connect": "*",
+    "connect": "2.8.4",
     "debug": "*"
   },
   "devDependencies": {
