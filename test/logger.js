@@ -12,6 +12,9 @@ MockStream.prototype.write = function(str) {
   this.data.push(str);
 };
 
+/**
+ * See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+ */
 
 function escapeRegExp(str) {
   return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
