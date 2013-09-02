@@ -17,8 +17,18 @@ exports.client = function client(path, options) {
     urlObj.query.headers = JSON.stringify(options.headers);
     delete urlObj.search;
     uri = url.format(urlObj);
+    delete options.headers;
   }
-  return io(uri, {forceNew: true});
+
+  var _options = {
+    forceNew: true,
+    reconnection: false
+  };
+  for (var key in options) {
+    _options[key] = options[key];
+  }
+
+  return io(uri, _options);
 };
 
 exports.startServer = function(done) {
