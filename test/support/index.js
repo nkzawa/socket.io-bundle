@@ -1,13 +1,13 @@
 var http = require('http')
   , url = require('url')
-  , server = require('socket.io')
-  , io = require('socket.io-client')
+  , io = require('socket.io')
+  , client = require('socket.io-client')
   , connect = require('connect')
   , signature = require('cookie-signature')
   , port = 8888;
 
 
-exports.client = function client(path, options) {
+exports.client = function(path, options) {
   path = path || '';
   options = options || {};
 
@@ -28,34 +28,33 @@ exports.client = function client(path, options) {
     _options[key] = options[key];
   }
 
-  return io(uri, _options);
+  return client(uri, _options);
 };
 
-exports.startServer = function(done) {
-  this.app = connect();
-  this.server = http.Server(this.app);
-  this.io = server(this.server);
-  this.io.use(exports.header);
-  this.server.listen(port, done);
+exports.startServer = function(context, done) {
+  context.app = connect();
+  context.server = http.Server(context.app);
+  context.io = io(context.server);
 
-  var self = this;
+  context.io.use(exports.header);
+  context.server.listen(port, done);
 
-  this.sockets = [];
-  this.server.on('connection', function(sockets) {
-    self.sockets.push(sockets);
+  context.sockets = [];
+  context.server.on('connection', function(socket) {
+    context.sockets.push(socket);
   });
 };
 
-exports.stopServer = function(done) {
+exports.stopServer = function(context, done) {
   // FIXME: following doesn't work when error.
   // this.io.sockets.sockets.slice().forEach(function(socket) {
   //   socket.disconnect(true);
   // });
 
-  this.sockets.forEach(function(socket) {
+  context.sockets.forEach(function(socket) {
     socket.destroy();
   });
-  this.server.close(done);
+  context.server.close(done);
 };
 
 exports.header = function(socket, next) {
@@ -74,5 +73,7 @@ exports.header = function(socket, next) {
 exports.sessionCookie = function(req, secret) {
   var cookie = req.session.cookie
     , val = 's:' + signature.sign(req.sessionID, secret);
+
   return cookie.serialize('connect.sid', val);
 };
+

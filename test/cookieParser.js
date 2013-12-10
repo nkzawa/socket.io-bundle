@@ -6,10 +6,10 @@ var expect = require('chai').expect
 
 
 describe('cookieParser', function() {
-
   beforeEach(function(done) {
     var self = this;
-    support.startServer.call(this, function(e) {
+
+    support.startServer(this, function(e) {
       self.io.use(bundle.cookieParser('keyboard cat'));
       self.io.on('connection', function(socket) {
         socket.send(socket.request.cookies);
@@ -21,7 +21,9 @@ describe('cookieParser', function() {
     });
   });
 
-  afterEach(support.stopServer);
+  afterEach(function(done) {
+    support.stopServer(this, done);
+  });
 
   describe('when no cookies are sent', function() {
     it('should default req.cookies to {}', function(done) {

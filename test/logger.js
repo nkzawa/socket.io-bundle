@@ -26,9 +26,13 @@ function formatToRegExp(format) {
 }
 
 describe('logger', function() {
+  beforeEach(function(done) {
+    support.startServer(this, done);
+  });
 
-  beforeEach(support.startServer);
-  afterEach(support.stopServer);
+  afterEach(function(done) {
+    support.stopServer(this, done);
+  });
 
   it('should write a log on connection', function(done) {
     var stream = new MockStream();

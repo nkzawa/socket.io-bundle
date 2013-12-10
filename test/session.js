@@ -22,8 +22,13 @@ describe('session', function() {
   })
 
   describe('acceptance', function() {
-    beforeEach(support.startServer);
-    afterEach(support.stopServer);
+    beforeEach(function(done) {
+      support.startServer(this, done);
+    });
+
+    afterEach(function(done) {
+      support.stopServer(this, done);
+    });
 
     describe('req.session', function() {
       it('should persist', function(done) {
