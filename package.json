@@ -17,13 +17,13 @@
     "test": "node_modules/.bin/mocha --reporter dot"
   },
   "dependencies": {
-    "connect": "2.11.2",
+    "connect": "2.14.4",
     "debug": "0.8.0"
   },
   "devDependencies": {
     "socket.io": "1.0.0-pre",
     "socket.io-client": "1.0.0-pre",
-    "cookie-signature": "1.0.1",
+    "cookie-signature": "1.0.3",
     "mocha": "*",
     "chai": "*"
   }

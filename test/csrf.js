@@ -59,7 +59,7 @@ describe('csrf', function() {
   it('should fail with an invalid token', function(done) {
     var socket = client('/?_csrf=42', {headers: {Cookie: cookie}});
     socket.once('error', function(err) {
-      expect(err).to.eql('Forbidden');
+      expect(err).to.eql('invalid csrf token');
       done();
     });
   });
@@ -67,7 +67,7 @@ describe('csrf', function() {
   it('should fail with no token', function(done){
     var socket = client('/', {headers: {Cookie: cookie}});
     socket.once('error', function(err) {
-      expect(err).to.eql('Forbidden');
+      expect(err).to.eql('invalid csrf token');
       done();
     });
   });
