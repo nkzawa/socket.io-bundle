@@ -8,27 +8,24 @@ var http = require('http')
 
 
 exports.client = function(path, options) {
-  path = path || '';
+  path = path || '/';
   options = options || {};
 
   var uri = 'http://localhost:' + port + path;
+  var urlObj = url.parse(uri, true);
   if (options.headers) {
-    var urlObj = url.parse(uri, true);
     urlObj.query.headers = JSON.stringify(options.headers);
     delete urlObj.search;
     uri = url.format(urlObj);
     delete options.headers;
   }
 
-  var _options = {
-    forceNew: true,
-    reconnection: false
-  };
+  var _options = {reconnection: false};
   for (var key in options) {
     _options[key] = options[key];
   }
 
-  return client(uri, _options);
+  return client.Manager(uri, _options).socket(urlObj.pathname);
 };
 
 exports.startServer = function(context, done) {

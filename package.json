@@ -4,7 +4,10 @@
   "description": "A collection of middlewares for upcoming Socket.IO 1.0",
   "author": "Naoyuki Kanezawa <naoyuki.kanezawa@gmail.com>",
   "keywords": [
-    "middleware", "rack", "socket.io", "connect"
+    "middleware",
+    "rack",
+    "socket.io",
+    "connect"
   ],
   "repository": {
     "type": "git",
@@ -15,11 +18,11 @@
   },
   "dependencies": {
     "connect": "2.11.2",
-    "debug": "*"
+    "debug": "0.8.0"
   },
   "devDependencies": {
-    "socket.io": "nkzawa/socket.io",
-    "socket.io-client": "nkzawa/socket.io-client",
+    "socket.io": "1.0.0-pre",
+    "socket.io-client": "1.0.0-pre",
     "cookie-signature": "1.0.1",
     "mocha": "*",
     "chai": "*"
