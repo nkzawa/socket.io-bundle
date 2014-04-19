@@ -1,6 +1,6 @@
 {
   "name": "socket.io-bundle",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "A collection of middlewares for upcoming Socket.IO 1.0",
   "author": "Naoyuki Kanezawa <naoyuki.kanezawa@gmail.com>",
   "keywords": [
@@ -14,7 +14,7 @@
     "url": "git://github.com/nkzawa/socket.io-bundle.git"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter dot"
+    "test": "mocha --reporter dot"
   },
   "dependencies": {
     "cookie-parser": "1.0.1",
