@@ -1,6 +1,6 @@
 {
   "name": "socket.io-bundle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A collection of middlewares for upcoming Socket.IO 1.0",
   "author": "Naoyuki Kanezawa <naoyuki.kanezawa@gmail.com>",
   "keywords": [
