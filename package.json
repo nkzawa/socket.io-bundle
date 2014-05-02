@@ -24,8 +24,8 @@
     "debug": "0.8.0"
   },
   "devDependencies": {
-    "socket.io": "1.0.0-pre",
-    "socket.io-client": "1.0.0-pre",
+    "socket.io": "1.0.0-pre2",
+    "socket.io-client": "1.0.0-pre2",
     "connect": "~2.14.4",
     "cookie-signature": "~1.0.3",
     "mocha": "*",
