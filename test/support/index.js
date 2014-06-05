@@ -1,10 +1,10 @@
-var http = require('http')
-  , url = require('url')
-  , io = require('socket.io')
-  , client = require('socket.io-client')
-  , connect = require('connect')
-  , signature = require('cookie-signature')
-  , port = 8888;
+var http = require('http');
+var url = require('url');
+var io = require('socket.io');
+var client = require('socket.io-client');
+var connect = require('connect');
+var signature = require('cookie-signature');
+var port = 8888;
 
 
 exports.client = function(path, options) {
@@ -55,8 +55,8 @@ exports.stopServer = function(context, done) {
 };
 
 exports.header = function(socket, next) {
-  var req = socket.request
-    , headers = req._query.headers;
+  var req = socket.request;
+  var headers = req._query.headers;
 
   if (headers) {
     headers = JSON.parse(headers);
@@ -68,8 +68,8 @@ exports.header = function(socket, next) {
 };
 
 exports.sessionCookie = function(req, secret) {
-  var cookie = req.session.cookie
-    , val = 's:' + signature.sign(req.sessionID, secret);
+  var cookie = req.session.cookie;
+  var val = 's:' + signature.sign(req.sessionID, secret);
 
   return cookie.serialize('connect.sid', val);
 };

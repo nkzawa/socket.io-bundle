@@ -1,9 +1,9 @@
-var expect = require('chai').expect
-  , signature = require('cookie-signature')
-  , bundle = require('../')
-  , support = require('./support')
-  , client = support.client
-  , sessionCookie = support.sessionCookie;
+var expect = require('chai').expect;
+var signature = require('cookie-signature');
+var bundle = require('../');
+var support = require('./support');
+var client = support.client;
+var sessionCookie = support.sessionCookie;
 
 
 var min = 60 * 1000;

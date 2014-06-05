@@ -1,7 +1,7 @@
-var expect = require('chai').expect
-  , bundle = require('../')
-  , support = require('./support')
-  , client = support.client;
+var expect = require('chai').expect;
+var bundle = require('../');
+var support = require('./support');
+var client = support.client;
 
 
 function MockStream() {

@@ -1,8 +1,8 @@
-var expect = require('chai').expect
-  , signature = require('cookie-signature')
-  , bundle = require('../')
-  , support = require('./support')
-  , client = support.client;
+var expect = require('chai').expect;
+var signature = require('cookie-signature');
+var bundle = require('../');
+var support = require('./support');
+var client = support.client;
 
 
 describe('cookieParser', function() {

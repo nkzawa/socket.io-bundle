@@ -1,9 +1,9 @@
-var expect = require('chai').expect
-  , http = require('http')
-  , connect = require('connect')
-  , bundle = require('../')
-  , support = require('./support')
-  , client = support.client;
+var expect = require('chai').expect;
+var http = require('http');
+var connect = require('connect');
+var bundle = require('../');
+var support = require('./support');
+var client = support.client;
 
 
 describe('csrf', function() {
