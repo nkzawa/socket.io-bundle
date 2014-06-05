@@ -1,7 +1,7 @@
 {
   "name": "socket.io-bundle",
-  "version": "0.1.1",
-  "description": "A collection of middlewares for upcoming Socket.IO 1.0",
+  "version": "0.1.2",
+  "description": "A collection of middlewares for Socket.IO",
   "author": "Naoyuki Kanezawa <naoyuki.kanezawa@gmail.com>",
   "keywords": [
     "middleware",
@@ -17,16 +17,16 @@
     "test": "mocha --reporter dot"
   },
   "dependencies": {
-    "cookie-parser": "1.0.1",
-    "csurf": "1.1.0",
-    "morgan": "1.0.0",
-    "express-session": "1.0.4",
-    "debug": "0.8.1"
+    "cookie-parser": "1.1.0",
+    "csurf": "1.2.0",
+    "morgan": "1.1.1",
+    "express-session": "1.2.1",
+    "debug": "1.0.0"
   },
   "devDependencies": {
-    "socket.io": "1.0.0-pre2",
-    "socket.io-client": "1.0.0-pre2",
-    "connect": "~2.14.4",
+    "socket.io": "1.0.4",
+    "socket.io-client": "1.0.4",
+    "connect": "~2.19.3",
     "cookie-signature": "~1.0.3",
     "mocha": "*",
     "chai": "*"
